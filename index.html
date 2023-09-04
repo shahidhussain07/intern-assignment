@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>intern-assignment</title>
+    <style>
+        ol {
+            counter-reset: item;
+        }
+
+        #moduleList li {
+            display: block
+        }
+
+        li:before {
+            content: counters(item, ".") ". ";
+            counter-increment: item;
+        }
+
+        .active {
+            background-color: #3B4C6D !important;
+            color: white !important;
+        }
+
+        ::marker {
+            color: #3B4C6D;
+            /* content: "•"; */
+        }
+        #menu li,
+        #menu ul li {
+            list-style: none;
+        }
+        #menu li::before {
+            content: "";
+        }
+    </style>
+    <script src="./script.js" defer></script>
+</head>
+
+<body class="relative p-5 flex-col justify-center items-center bg-[#f5f5f5]">
+    <!-- Navbar -->
+    <div class="flex flex-col items-center">
+        <nav class="bg-white py-3 px-4 w-full mx-2 md:w-4/5 md:mx-0 rounded-3xl  flex  
+            flex-col md:flex-row gap-4 md:gap-0 items-center
+        justify-between">
+            <ul class="space-x-4 font-semibold flex flex-wrap gap-2 items-center justify-around" id="weekList">
+                <button class="bg-[#f7f9fb] text-[#3b4c6d] rounded-2xl hover:text-white hover:bg-[#3B4C6D]
+bg-[#3B4C6D]
+  px-4 py-2" id="week1">
+                    Week 1
+                </button>
+                <button class="bg-[#f7f9fb] text-[#3b4c6d] rounded-2xl hover:text-white hover:bg-[#3B4C6D]
+bg-[#3B4C6D]
+ px-4 py-2" id="week2">
+                    Week 2
+                </button>
+                <button class="bg-[#f7f9fb] text-[#3b4c6d] rounded-2xl hover:text-white hover:bg-[#3B4C6D]
+bg-[#3B4C6D]
+ px-4 py-2" id="week3">
+                    Week 3
+                </button>
+                <button class="bg-[#f7f9fb] text-[#3b4c6d] rounded-2xl hover:text-white hover:bg-[#3B4C6D]
+bg-[#3B4C6D]
+ px-4 py-2" id="week4">
+                    Week 4
+                </button>
+            </ul>
+            <div class="flex flex-col md:flex-row gap-2 items-center justify-around">
+            <button id="downloadButton"
+                class="py-1 px-3 flex space-x-2 text-center whitespace-nowrap flex items-center justify-center text-[#3b4c6d]"
+                onclick="downloadData()">
+                Download as JSON
+            </button>
+            <button id="addButton"
+                class="py-1 px-3 flex space-x-2 text-center whitespace-nowrap flex items-center justify-center text-[#3b4c6d]">
+                <img src="./icons/carbon_calendar.svg" style="height: 24px; width: 24px;" />
+                <p>Add a new week</p>
+            </button>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Display Content of week  -->
+    <div class="flex flex-col items-center h-screen">
+        <div class="w-full mx-2 md:w-4/5 md:mx-0 py-4 h-3/5 flex gap-4 flex-col md:flex-row">
+            <div class="bg-white w-full md:w-1/3 p-4 rounded-lg font-[500] " id="weekName">Week 1</div>
+            <div class="bg-white w-full md:w-2/3 p-4 rounded-lg">
+                <ol id="moduleList" class="p-4 flex flex-col gap-1 list-decimal">
+
+
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Week -->
+    <div class="hidden absolute top-20 right-40 p-5 border w-80 shadow-lg rounded-md bg-white" id="add-card">
+        <div class="m-2">
+            <div class="flex justify-between items-center mb-2 ">
+                <h3 class="font-[600] text-xl text-[#f14e1e]">ADD NEW WEEK</h3>
+                <svg width="24" height="24" viewBox="0 0 16 16" fill="#f14e1e" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M13 10.5H11.5V9H10.5V10.5H9V11.5H10.5V13H11.5V11.5H13V10.5Z" fill="#f14e1e" />
+                    <path
+                        d="M11 15C8.8 15 7 13.2 7 11C7 8.8 8.8 7 11 7C13.2 7 15 8.8 15 11C15 13.2 13.2 15 11 15ZM11 8C9.35 8 8 9.35 8 11C8 12.65 9.35 14 11 14C12.65 14 14 12.65 14 11C14 9.35 12.65 8 11 8Z"
+                        fill="#f14e1e" />
+                    <path
+                        d="M14 3C14 2.45 13.55 2 13 2H11V1H10V2H6V1H5V2H3C2.45 2 2 2.45 2 3V13C2 13.55 2.45 14 3 14H6V13H3V3H5V4H6V3H10V4H11V3H13V6H14V3Z"
+                        fill="#f14e1e" />
+                </svg>
+
+            </div>
+
+            <hr class="flex-grow border-t border-gray-300 mb-4" />
+
+            <div class="relative font-semibold flex justify-between gap-2">
+                <div id="menu" class="text-2xl w-full ">
+                    <button
+                        class="flex items-center rounded-xl border bg-[#f7f9fb] outline-none border-none px-4 py-2 focus:outline-none w-full flex justify-between">
+                        <p class="text-gray-500 text-[16px]" id="order">After</p>
+                        <svg class="-mr-1 ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+
+                    <ul class="absolute left-0 mt-2 hidden rounded border border-gray-300 bg-white shadow-md ">
+                        <li class="cursor-pointer px-4 py-2 text-lg font-medium hover:bg-gray-200" id="order_1">Before
+                        </li>
+                        <li class="cursor-pointer px-4 py-2 text-lg font-medium  hover:bg-gray-200" id="order_2">After
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="menu" class="text-2xl w-full">
+                    <button
+                        class="flex items-center rounded-xl border border-none bg-[#f7f9fb] px-4 py-2 focus:outline-none w-full flex justify-between">
+                        <p class="text-gray-500 text-[16px]" id="selectedWeek">Week 4</p>
+                        <svg class="-mr-1 ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <ul class="absolute left-[52%] mt-2 hidden rounded border border-gray-300 bg-white shadow-md overflow-y-auto max-h-32"
+                        id="placeList">
+                        <li class="cursor-pointer px-4 py-2 hover:bg-gray-200 text-lg font-medium " id="week_1">
+                            Week 1
+                        </li>
+                        <li class="cursor-pointer px-4 py-2 hover:bg-gray-200 text-lg font-medium " id="week_2">
+                            Week 2
+                        </li>
+                        <li class="cursor-pointer px-4 py-2 hover:bg-gray-200 text-lg font-medium " id="week_3">
+                            Week 3
+                        </li>
+                        <li class="cursor-pointer px-4 py-2 hover:bg-gray-200 text-lg font-medium " id="week_4">
+                            Week 4
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="my-3 text-sm text-center">
+                New week will be added
+                <span class="text-gray-500" id="orderText">"order" </span>
+                <span class="text-gray-500" id="weekText">"week"</span>
+            </div>
+
+            <hr class="flex-grow border-t border-gray-300 mt-4" />
+
+            <div class="flex justify-around items-center pt-6 text-lg gap-2">
+                <button class="hover:bg-red-500 hover:text-white rounded-md w-full p-2" onclick="toggleAddWeekCard()">
+                    Cancel
+                </button>
+                <button id="ok-btn" class="bg-[#3b4c6d] text-white font-medium rounded-md hover:bg-[#3b4c6d]
+                    p-2 focus:outline-none w-full" onclick="createNewWeek()">
+                    Create
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
